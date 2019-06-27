@@ -82,7 +82,7 @@ class Data(ct.Structure):
     ]
 
 # Compile & attach bpf program
-b = BPF(src_file ="ulb.c", debug=debug, cflags=["-w", "-DCTXTYPE=xdp_md"])
+b = BPF(src_file ="ulb.c", debug=debug, cflags=["-Wno-incompatible-pointer-types", "-Wno-compare-distinct-pointer-types", "-D__BPF_TRACING__"])
 fn = b.load_func("xdp_prog", BPF.XDP)
 b.attach_xdp(ifnet, fn)
 
